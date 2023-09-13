@@ -1,0 +1,25 @@
+version: '3'
+services:
+  script:
+    build:
+      context: ./lambda
+    volumes:
+      - ./lambda:/app
+    ports:
+      - 9000:8080
+    environment:
+      - AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY
+      - AWS_SESSION_TOKEN
+      - AWS_DEFAULT_REGION
+      - ENV=local
+      - QUERY=SELECT "test" as test;
+      - MYSQL_HOST=host.docker.internal
+      - MYSQL_TCP_PORT=3310
+      - RDS_CONNECTION_SECRET=dev/app-name/reader/readonly
+      - SLACK_WEBHOOK_URL_SECRET=dev/app-name/slack_webhook_url
+      - SLACK_WEBHOOK_URL_SECRET_KEY=test
+      - SLACK_NOTIFY_ENABLED=False
+      - BOX_CONFIG_SSM_PARAM=/app-name/box-cli-config-json
+      - BOX_DIST_FILE_NAME=BOXアップロードのテストです（ローカル）.xlsx
+      - BOX_DIST_FOLDER_ID=0

@@ -1,0 +1,20 @@
+env: dev
+subnet_id: subnet-12345
+security_group_id: sg-12345
+rds_connection_secret: dev/app-name/reader/readonly
+slack_webhook_url_secret: dev/app-name/slack_webhook_url
+box_config_ssm_param: /app-name/box-cli-config-json
+lambda_configs:
+  - sql_file: queries/hello_world.sql
+    cron: "cron(0 4 ? * WED *)"
+    subject: hello-world
+    slack_webhook_url_secret_key: test
+    slack_notify_enabled: False
+    box_dist_file_name: BOXアップロードのテストです.xlsx
+    box_dist_folder_id: 0
+  - sql_file: queries/hello_world.sql
+    subject: hello-world2
+    slack_webhook_url_secret_key: test
+    slack_notify_enabled: False
+    box_dist_file_name: BOXアップロードのテストです（定期実行無し）.xlsx
+    box_dist_folder_id: 0
